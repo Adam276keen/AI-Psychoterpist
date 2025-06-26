@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI PSYCHOTERAPEUT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --background-light: #f0f9ff; /* sky-50 */
+      --text-light: #0c4a6e; /* sky-900 */
+      --background-dark: #082f49; /* sky-950 */
+      --text-dark: #e0f2fe; /* sky-100 */
+      --accent-color: #0ea5e9; /* sky-500 */
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1e293b; /* slate-800 */
+      --border-light: #e0e7ff; /* indigo-100 */
+      --border-dark: #374151; /* gray-700 */
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.light-mode {
+      background-color: var(--background-light);
+      color: var(--text-light);
+    }
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+    /* Custom scrollbar for chat area (can be adapted for new theme) */
+    .chat-area::-webkit-scrollbar {
+      width: 8px;
+    }
+    .chat-area::-webkit-scrollbar-track {
+      background: transparent; /* Updated for new theme */
+    }
+    .chat-area::-webkit-scrollbar-thumb {
+      background: #9ca3af; /* gray-400 */
+      border-radius: 10px;
+    }
+    .chat-area.dark-mode::-webkit-scrollbar-thumb {
+      background: #4b5563; /* gray-600 */
+    }
+    .chat-area::-webkit-scrollbar-thumb:hover {
+      background: #6b7280; /* gray-500 */
+    }
+    .chat-area.dark-mode::-webkit-scrollbar-thumb:hover {
+      background: #374151; /* gray-700 */
+    }
+    .font-outfit {
+        font-family: 'Outfit', sans-serif;
+    }
+    .font-inter {
+        font-family: 'Inter', sans-serif;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.6.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

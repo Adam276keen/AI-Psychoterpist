@@ -1,0 +1,8 @@
+{
+  "name": "AI Psychotherapist",
+  "description": "Aura is an AI-powered psychotherapist chat application that provides a supportive space for users to explore their thoughts and feelings using text or voice. It leverages Gemini API for conversational AI and browser speech capabilities for voice interaction.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "prompt": ""
+}
