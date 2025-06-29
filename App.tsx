@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { AppView, Theme, ChatMessage, User, Language, UIStrings } from './types';
 import { UI_STRINGS, LOCAL_STORAGE_THEME_KEY, LOCAL_STORAGE_LANGUAGE_KEY, LOCAL_STORAGE_CURRENT_USER_KEY } from './constants';
@@ -13,9 +12,18 @@ import HelpView from './views/HelpView';
 import Footer from './components/Footer';
 import LoginView from './views/LoginView';
 import RegisterView from './views/RegisterView';
-import CookieConsentBanner from './components/CookieConsentBanner'; // Import CookieConsentBanner
+import CookieConsentBanner from './components/CookieConsentBanner';
+import AdSenseUnit from './components/AdSenseUnit';
 
-const App: React.FC = () => {
+// Client ID je nyní nastaveno. Ještě je třeba získat ID reklamních jednotek.
+// 1. Jděte do svého účtu Google AdSense.
+// 2. Vytvořte nové "Obsahové reklamní jednotky" (Display ad units).
+// 3. Zkopírujte jejich 'ID reklamní jednotky' (ad slot ID) a vložte je níže.
+const ADSENSE_CLIENT_ID = "ca-pub-3531487545757603"; // Toto je vaše Client ID z AdSense.
+const ADSENSE_AD_SLOT_LEFT = "YYYYYYYYYY";         // << ZDE VLOŽTE ID REKLAMNÍ JEDNOTKY
+const ADSENSE_AD_SLOT_RIGHT = "ZZZZZZZZZZ";        // << ZDE VLOŽTE ID REKLAMNÍ JEDNOTKY (může být stejné)
+
+export const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>(AppView.HOME);
   const [theme, setTheme] = useState<Theme>('light');
   const [language, setLanguage] = useState<Language>('cze');
@@ -238,13 +246,36 @@ const App: React.FC = () => {
         onLogout={handleLogout}
         currentStrings={currentStrings}
       />
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {renderView()}
-      </main>
+      <div className="flex-1 w-full flex justify-center">
+        {/* Left Ad Placeholder */}
+        <aside className="hidden lg:block w-48 xl:w-56 py-8 pr-4 flex-shrink-0">
+            <div className="sticky top-28 h-[calc(100vh-10rem)]">
+                <AdSenseUnit 
+                  theme={theme}
+                  adClient={ADSENSE_CLIENT_ID}
+                  adSlot={ADSENSE_AD_SLOT_LEFT}
+                />
+            </div>
+        </aside>
+
+        {/* Main content area */}
+        <main className="flex-grow px-4 py-8 w-full max-w-7xl">
+            {renderView()}
+        </main>
+
+        {/* Right Ad Placeholder */}
+        <aside className="hidden lg:block w-48 xl:w-56 py-8 pl-4 flex-shrink-0">
+            <div className="sticky top-28 h-[calc(100vh-10rem)]">
+                <AdSenseUnit 
+                  theme={theme}
+                  adClient={ADSENSE_CLIENT_ID}
+                  adSlot={ADSENSE_AD_SLOT_RIGHT}
+                />
+            </div>
+        </aside>
+      </div>
       <Footer currentStrings={currentStrings} />
       <CookieConsentBanner currentStrings={currentStrings} theme={theme} />
     </div>
   );
 };
-
-export default App;
